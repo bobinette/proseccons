@@ -7,7 +7,7 @@
         :title="proseccon.title"
         :pros="proseccon.pros"
         :cons="proseccon.cons"
-        @new-proseccon="(input) => newProseccon(idx, input)"
+        @new-item="(input) => newItem(idx, input)"
       ></pc-table>
     </div>
   </div>
@@ -19,7 +19,7 @@ import Table from './table/Table';
 
 const re = new RegExp(/^(.*)(?:(?:: )(.*)) ([-+]\d)$/);
 
-const parseProseccon = (input) => {
+const parseItem = (input) => {
   const matches = re.exec(input);
   if (!matches) {
     return null;
@@ -63,8 +63,8 @@ export default {
     };
   },
   methods: {
-    newProseccon(idx, input) {
-      const proseccon = parseProseccon(input);
+    newItem(idx, input) {
+      const proseccon = parseItem(input);
       if (!proseccon || proseccon.score === 0) {
         return;
       }

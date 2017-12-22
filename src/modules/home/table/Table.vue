@@ -16,8 +16,8 @@
         </div>
       </div>
 
-      <!-- New proseccon input -->
-      <input type="text" v-model="proseccon" @keyup.13="addProseccon" placeholder="Add a new item in the format &quot;title: description ±1&quot;">
+      <!-- New item input -->
+      <input type="text" v-model="item" @keyup.13="addItem" placeholder="Add a new item in the format &quot;title: description ±1&quot;">
     </div>
   </div>
 </template>
@@ -40,13 +40,13 @@ export default {
   },
   data() {
     return {
-      proseccon: '',
+      item: '',
     };
   },
   methods: {
-    addProseccon() {
-      this.$emit('new-proseccon', this.proseccon);
-      this.proseccon = '';
+    addItem() {
+      this.$emit('new-item', this.item);
+      this.item = '';
     },
   },
   components: {
