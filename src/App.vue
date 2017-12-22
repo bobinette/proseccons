@@ -14,6 +14,6 @@ export default {
 @import 'style/base.scss';
 
 #app {
-  margin-bottom: 1rem;
+  margin-bottom: 3rem;
 }
 </style>

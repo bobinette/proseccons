@@ -60,22 +60,6 @@ export default {
 
 .Table {
   padding: 1rem;
-
-  input {
-    background: transparent;
-    outline: none;
-    border: none;
-    border-bottom: 1px solid $gray-lighter;
-    width: 100%;
-
-    &:hover {
-      border-bottom-color: lighten($brand-primary, 30);
-    }
-
-    &:focus {
-      border-bottom-color: $brand-primary;
-    }
-  }
 }
 
 .Column {
