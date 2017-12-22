@@ -78,7 +78,7 @@ export default {
   methods: {
     newProseccon() {
       this.proseccons.push({ title: this.title, pros: [], cons: [] });
-      this.item = '';
+      this.title = '';
     },
     newItem(idx, input) {
       const proseccon = parseItem(input);
@@ -94,9 +94,23 @@ export default {
       }
     },
   },
+  watch: {
+    proseccons: {
+      handler() {
+        localStorage.setItem('proseccons', JSON.stringify(this.proseccons));
+      },
+      deep: true,
+    },
+  },
   components: {
     'pc-table': Table, // Because table is reserved
     Navbar,
+  },
+  mounted() {
+    const proseccons = JSON.parse(localStorage.getItem('proseccons'));
+    if (proseccons) {
+      this.proseccons = proseccons;
+    }
   },
 };
 </script>
