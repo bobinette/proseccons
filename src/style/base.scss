@@ -17,6 +17,18 @@ body {
     &.flex-align-center {
         align-items: center;
     }
+
+    &.flex-space-between {
+        justify-content: space-between;
+    }
+}
+
+.success {
+    color: $brand-success;
+}
+
+.danger {
+    color: $brand-danger;
 }
 
 input {
@@ -33,4 +45,11 @@ input {
     &:focus {
       border-bottom-color: $brand-primary;
     }
+}
+
+// Adapt bootstrap
+.btn.btn-link {
+    padding: 0;
+    cursor: pointer;
+    box-shadow: none;
 }

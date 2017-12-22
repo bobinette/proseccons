@@ -3,7 +3,7 @@
     <span class="Content">
       <strong>{{ item.title }}: </strong>{{ item.description }}
     </span>
-    <span class="Score">
+    <span class="Score" :class="[scoreStyle]">
       <strong>{{ item.score || 1 }}</strong>
     </span>
   </li>
@@ -16,6 +16,10 @@ export default {
     item: {
       type: Object,
       required: true,
+    },
+    scoreStyle: {
+      type: String,
+      default: null,
     },
   },
 };
@@ -34,6 +38,5 @@ export default {
 
 .Score {
   padding: 0 1rem;
-  color: $brand-primary;
 }
 </style>
