@@ -17,22 +17,36 @@
           <ul>
             <cell v-for="(item, idx) in pros" :key="idx" :item="item" score-style="success"></cell>
           </ul>
+          <input type="text" v-model="proInput" @keyup.13="addItem(proInput, 'pros')" placeholder="Add a new pro in the format &quot;title: description ±1&quot;">
         </div>
         <div class="col-md-6 Column">
           <ul>
             <cell v-for="(item, idx) in cons" :item="item" :key="idx" score-style="danger"></cell>
           </ul>
+          <input type="text" v-model="conInput" @keyup.13="addItem(conInput, 'cons')" placeholder="Add a new con in the format &quot;title: description ±1&quot;">
         </div>
       </div>
-
-      <!-- New item input -->
-      <input type="text" v-model="item" @keyup.13="addItem" placeholder="Add a new item in the format &quot;title: description ±1&quot;">
     </div>
   </div>
 </template>
 
 <script>
 import Cell from './cell/Cell';
+
+const re = new RegExp(/^(.*)(?:(?:: )(.*)) (\d)$/);
+
+const parseItem = (input) => {
+  const matches = re.exec(input);
+  if (!matches) {
+    return null;
+  }
+
+  return {
+    title: matches[1],
+    description: matches[2],
+    score: parseInt(matches[3], 10),
+  };
+};
 
 export default {
   name: 'Table',
@@ -49,7 +63,8 @@ export default {
   },
   data() {
     return {
-      item: '',
+      proInput: '',
+      conInput: '',
       expanded: false,
     };
   },
@@ -62,9 +77,19 @@ export default {
     },
   },
   methods: {
-    addItem() {
-      this.$emit('new-item', this.item);
-      this.item = '';
+    addItem(input, key) {
+      const item = parseItem(input);
+      if (!item) {
+        return;
+      }
+
+      this.$emit('new-item', item, key);
+
+      if (key === 'pros') {
+        this.proInput = '';
+      } else {
+        this.conInput = '';
+      }
     },
   },
   components: {
@@ -102,6 +127,6 @@ export default {
 }
 
 input {
-  margin-bottom: 1rem;
+  margin: 1rem;
 }
 </style>
